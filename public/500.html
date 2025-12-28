@@ -1,65 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>We're sorry, but something went wrong (500)</title>
+  <title>Something Went Wrong (500) | Nerve</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#FAF9F7">
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+    body {
+      background-color: #FAF9F7;
+      color: #1C1917;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    .container {
+      width: 100%;
+      max-width: 28rem;
+      text-align: center;
+    }
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+    .error-code {
+      font-size: 6rem;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    .card {
+      background: white;
+      border: 1px solid #E7E5E4;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 4px 6px -1px rgba(28, 25, 23, 0.07), 0 2px 4px -2px rgba(28, 25, 23, 0.05);
+    }
+
+    .icon {
+      width: 4rem;
+      height: 4rem;
+      margin: 0 auto 1.5rem;
+      color: #DC2626;
+    }
+
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #1C1917;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.025em;
+    }
+
+    .description {
+      color: #57534E;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(to bottom, #F59E0B, #D97706);
+      border: none;
+      box-shadow: 0 1px 2px 0 rgba(28, 25, 23, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(to bottom, #D97706, #C2410C);
+    }
+
+    .btn-secondary {
+      color: #57534E;
+      background: white;
+      border: 1px solid #D6D3D1;
+      box-shadow: 0 1px 2px 0 rgba(28, 25, 23, 0.05);
+    }
+
+    .btn-secondary:hover {
+      background: #F5F5F4;
+      border-color: #A8A29E;
+    }
+
+    .btn:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #FAF9F7, 0 0 0 4px #F59E0B;
+    }
+
+    .footer {
+      margin-top: 1.5rem;
+      font-size: 0.8125rem;
+      color: #78716C;
+    }
+
+    .brand {
+      color: #D97706;
+      font-weight: 500;
+    }
   </style>
 </head>
 
-<body class="rails-default-error-page">
-  <div class="dialog">
-    <div>
-      <h1>We're sorry, but something went wrong.</h1>
+<body>
+  <div class="container">
+    <div class="error-code">500</div>
+    <div class="card">
+      <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+      </svg>
+      <h1>Something went wrong</h1>
+      <p class="description">
+        We encountered an unexpected error. Our team has been notified.
+        Please try again in a moment.
+      </p>
+      <div class="btn-group">
+        <a href="/" class="btn btn-primary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          Go Home
+        </a>
+        <button onclick="location.reload()" class="btn btn-secondary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          Retry
+        </button>
+      </div>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
+    <p class="footer">
+      <span class="brand">Nerve</span> by Brainz Lab
+    </p>
   </div>
 </body>
 </html>

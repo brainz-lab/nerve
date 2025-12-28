@@ -1,13 +1,287 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>Nerve by Brainz Lab</title>
+    <!--[if mso]>
+    <style type="text/css">
+      table { border-collapse: collapse; }
+      .fallback-font { font-family: Arial, sans-serif; }
+    </style>
+    <![endif]-->
     <style>
-      /* Email styles need to be inline */
+      /* Reset and base styles */
+      body, table, td, p, a, li, blockquote {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        background-color: #FAF9F7;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      table {
+        border-collapse: collapse !important;
+      }
+
+      img {
+        border: 0;
+        height: auto;
+        line-height: 100%;
+        outline: none;
+        text-decoration: none;
+      }
+
+      /* Container */
+      .email-container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Header */
+      .email-header {
+        background: linear-gradient(135deg, #D97706 0%, #EA580C 100%);
+        padding: 32px 40px;
+        text-align: center;
+      }
+
+      .email-header h1 {
+        margin: 0;
+        color: #FFFFFF;
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: -0.025em;
+      }
+
+      .email-header .tagline {
+        margin: 8px 0 0;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      /* Body */
+      .email-body {
+        background-color: #FFFFFF;
+        padding: 40px;
+        border-left: 1px solid #E7E5E4;
+        border-right: 1px solid #E7E5E4;
+      }
+
+      .email-body h2 {
+        margin: 0 0 16px;
+        color: #1C1917;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: -0.025em;
+      }
+
+      .email-body p {
+        margin: 0 0 16px;
+        color: #57534E;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .email-body a {
+        color: #D97706;
+        text-decoration: none;
+      }
+
+      .email-body a:hover {
+        text-decoration: underline;
+      }
+
+      /* Button */
+      .btn {
+        display: inline-block;
+        padding: 12px 24px;
+        background: linear-gradient(to bottom, #F59E0B, #D97706);
+        color: #FFFFFF !important;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .btn-secondary {
+        background: #FFFFFF;
+        color: #57534E !important;
+        border: 1px solid #D6D3D1;
+      }
+
+      /* Alert boxes */
+      .alert {
+        padding: 16px;
+        border-radius: 8px;
+        margin: 16px 0;
+      }
+
+      .alert-info {
+        background-color: #E0F2FE;
+        border: 1px solid #7DD3FC;
+        color: #0369A1;
+      }
+
+      .alert-success {
+        background-color: #D1FAE5;
+        border: 1px solid #6EE7B7;
+        color: #047857;
+      }
+
+      .alert-warning {
+        background-color: #FEF3C7;
+        border: 1px solid #FCD34D;
+        color: #B45309;
+      }
+
+      .alert-error {
+        background-color: #FEE2E2;
+        border: 1px solid #FCA5A5;
+        color: #B91C1C;
+      }
+
+      /* Stats grid */
+      .stats-grid {
+        margin: 24px 0;
+      }
+
+      .stat-item {
+        display: inline-block;
+        padding: 16px 24px;
+        background-color: #F5F5F0;
+        border-radius: 8px;
+        text-align: center;
+        margin: 4px;
+      }
+
+      .stat-value {
+        display: block;
+        font-size: 28px;
+        font-weight: 700;
+        color: #1C1917;
+        letter-spacing: -0.025em;
+      }
+
+      .stat-label {
+        display: block;
+        font-size: 12px;
+        color: #78716C;
+        margin-top: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      /* Footer */
+      .email-footer {
+        background-color: #F5F5F0;
+        padding: 24px 40px;
+        text-align: center;
+        border: 1px solid #E7E5E4;
+        border-top: none;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+
+      .email-footer p {
+        margin: 0;
+        color: #78716C;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .email-footer a {
+        color: #D97706;
+        text-decoration: none;
+      }
+
+      .email-footer .brand {
+        font-weight: 600;
+        color: #D97706;
+      }
+
+      /* Divider */
+      .divider {
+        border: none;
+        border-top: 1px solid #E7E5E4;
+        margin: 24px 0;
+      }
+
+      /* Utility */
+      .text-muted {
+        color: #78716C;
+      }
+
+      .text-small {
+        font-size: 13px;
+      }
+
+      /* Dark mode support */
+      @media (prefers-color-scheme: dark) {
+        .email-body {
+          background-color: #1C1917 !important;
+        }
+        .email-body h2,
+        .email-body p {
+          color: #E7E5E4 !important;
+        }
+      }
+
+      /* Mobile responsiveness */
+      @media only screen and (max-width: 600px) {
+        .email-container {
+          width: 100% !important;
+        }
+        .email-header,
+        .email-body,
+        .email-footer {
+          padding: 24px !important;
+        }
+      }
     </style>
   </head>
 
-  <body>
-    <%= yield %>
+  <body style="margin: 0; padding: 0; background-color: #FAF9F7;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #FAF9F7;">
+      <tr>
+        <td style="padding: 24px 16px;">
+          <table role="presentation" cellspacing="0" cellpadding="0" border="0" class="email-container" align="center" style="max-width: 600px; margin: 0 auto;">
+            <!-- Header -->
+            <tr>
+              <td class="email-header" style="background: linear-gradient(135deg, #D97706 0%, #EA580C 100%); padding: 32px 40px; text-align: center; border-top-left-radius: 8px; border-top-right-radius: 8px;">
+                <h1 style="margin: 0; color: #FFFFFF; font-size: 24px; font-weight: 600;">Nerve</h1>
+                <p class="tagline" style="margin: 8px 0 0; color: rgba(255, 255, 255, 0.9); font-size: 14px;">Your async backbone</p>
+              </td>
+            </tr>
+            <!-- Body -->
+            <tr>
+              <td class="email-body" style="background-color: #FFFFFF; padding: 40px; border-left: 1px solid #E7E5E4; border-right: 1px solid #E7E5E4;">
+                <%= yield %>
+              </td>
+            </tr>
+            <!-- Footer -->
+            <tr>
+              <td class="email-footer" style="background-color: #F5F5F0; padding: 24px 40px; text-align: center; border: 1px solid #E7E5E4; border-top: none; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
+                <p style="margin: 0 0 8px; color: #78716C; font-size: 13px;">
+                  <span class="brand" style="font-weight: 600; color: #D97706;">Nerve</span> by Brainz Lab
+                </p>
+                <p style="margin: 0; color: #A8A29E; font-size: 12px;">
+                  Background job monitoring for Sidekiq, Solid Queue, Resque, DelayedJob, and GoodJob
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
