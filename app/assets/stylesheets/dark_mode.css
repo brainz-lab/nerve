@@ -1,0 +1,100 @@
+/* ============================================
+   NERVE - Dark Mode Support
+   ============================================
+
+   This file provides dark mode CSS variables and utility classes
+   for the Nerve dashboard. It extends brainzlab-ui's dark mode system.
+
+   Usage:
+   1. Dark mode is toggled via the dark-mode Stimulus controller
+   2. Add .dark class to <html> element for dark mode
+   3. Use prefers-color-scheme: dark for automatic system detection
+
+   Color tokens (from brainzlab-ui):
+   - Dark bg: #121212 (--color-dark-bg)
+   - Dark surface: #1e1e1e (--color-dark-surface)
+   - Dark surface light: #2a2a2a (--color-dark-surface-light)
+   - Dark text: #e8e1d7 (--color-dark-text)
+   - Dark text muted: #a0a0a0 (--color-dark-text-muted)
+   - Dark border: #333333 (--color-dark-border)
+*/
+
+/* ----------------------------------------
+   CSS VARIABLES - Light/Dark Theme
+   ---------------------------------------- */
+:root {
+  /* Light theme (default) */
+  --nerve-bg: var(--color-cream-50, #FAF9F7);
+  --nerve-surface: white;
+  --nerve-surface-elevated: var(--color-cream-100, #F4F1EC);
+  --nerve-text: var(--color-ink-900, #3D3833);
+  --nerve-text-muted: var(--color-ink-500, #7A7165);
+  --nerve-border: var(--color-cream-200, #E8E1D7);
+
+  /* Theme color for browser chrome */
+  --nerve-theme-color: #FAF9F7;
+}
+
+.dark {
+  /* Dark theme */
+  --nerve-bg: var(--color-dark-bg, #121212);
+  --nerve-surface: var(--color-dark-surface, #1e1e1e);
+  --nerve-surface-elevated: var(--color-dark-surface-light, #2a2a2a);
+  --nerve-text: var(--color-dark-text, #e8e1d7);
+  --nerve-text-muted: var(--color-dark-text-muted, #a0a0a0);
+  --nerve-border: var(--color-dark-border, #333333);
+
+  /* Theme color for browser chrome */
+  --nerve-theme-color: #121212;
+}
+
+/* ----------------------------------------
+   SEMANTIC COLOR UTILITIES
+   ----------------------------------------
+   Use these for theme-aware styling */
+
+.bg-nerve-bg { background-color: var(--nerve-bg); }
+.bg-nerve-surface { background-color: var(--nerve-surface); }
+.bg-nerve-surface-elevated { background-color: var(--nerve-surface-elevated); }
+
+.text-nerve-text { color: var(--nerve-text); }
+.text-nerve-muted { color: var(--nerve-text-muted); }
+
+.border-nerve-border { border-color: var(--nerve-border); }
+
+/* ----------------------------------------
+   PREFERS-COLOR-SCHEME SUPPORT
+   ----------------------------------------
+   Automatically apply dark mode when system prefers dark
+   (unless user has explicitly chosen a theme) */
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --nerve-bg: var(--color-dark-bg, #121212);
+    --nerve-surface: var(--color-dark-surface, #1e1e1e);
+    --nerve-surface-elevated: var(--color-dark-surface-light, #2a2a2a);
+    --nerve-text: var(--color-dark-text, #e8e1d7);
+    --nerve-text-muted: var(--color-dark-text-muted, #a0a0a0);
+    --nerve-border: var(--color-dark-border, #333333);
+    --nerve-theme-color: #121212;
+  }
+}
+
+/* ----------------------------------------
+   TRANSITION UTILITIES
+   ---------------------------------------- */
+
+.theme-transition-all {
+  transition-property: color, background-color, border-color,
+                       text-decoration-color, fill, stroke,
+                       box-shadow, opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition-all {
+    transition-duration: 0.01ms !important;
+  }
+}
