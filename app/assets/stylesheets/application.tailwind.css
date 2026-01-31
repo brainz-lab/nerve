@@ -1,4 +1,7 @@
 /* BrainzLab Unified Design System */
 @import "brainzlab_ui/base";
 
+/* Nerve Dark Mode Support */
+@import "dark_mode.css";
+
 /* Nerve-specific overrides below */

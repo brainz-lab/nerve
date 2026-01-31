@@ -2,4 +2,66 @@
 @import "tailwindcss";
 @import "/brainzlab-ui/app/assets/stylesheets/brainzlab_ui/base.css";
 
-/* Project-specific overrides below */
+/* ============================================
+   NERVE - Project-specific overrides
+   ============================================ */
+
+/* Dark Mode Theme Utilities
+   These extend Tailwind with dark mode color utilities
+   that reference the brainzlab-ui CSS variables.
+   Using the dark: variant defined by brainzlab-ui */
+
+/* Light mode background utilities */
+.bg-dark-bg { background-color: var(--color-dark-bg); }
+.bg-dark-surface { background-color: var(--color-dark-surface); }
+.bg-dark-surface-light { background-color: var(--color-dark-surface-light); }
+
+/* Light mode text utilities */
+.text-dark-text { color: var(--color-dark-text); }
+.text-dark-text-muted { color: var(--color-dark-text-muted); }
+
+/* Light mode border utilities */
+.border-dark-border { border-color: var(--color-dark-border); }
+
+/* Dark mode variant utilities - using the @custom-variant dark from brainzlab-ui */
+.dark\:bg-dark-bg:where(.dark, .dark *) { background-color: var(--color-dark-bg); }
+.dark\:bg-dark-surface:where(.dark, .dark *) { background-color: var(--color-dark-surface); }
+.dark\:bg-dark-surface-light:where(.dark, .dark *) { background-color: var(--color-dark-surface-light); }
+
+.dark\:text-dark-text:where(.dark, .dark *) { color: var(--color-dark-text); }
+.dark\:text-dark-text-muted:where(.dark, .dark *) { color: var(--color-dark-text-muted); }
+
+.dark\:border-dark-border:where(.dark, .dark *) { border-color: var(--color-dark-border); }
+
+/* Dark mode visibility utilities for icon toggling */
+.dark\:block:where(.dark, .dark *) { display: block; }
+.dark\:hidden:where(.dark, .dark *) { display: none; }
+
+/* Dark mode toggle button - inherits from brainzlab-ui .dark-mode-toggle
+   but with Nerve-specific positioning */
+.nerve-dark-toggle {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+}
+
+/* Smooth transitions for theme switching */
+.theme-transition {
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* Duration utility for transitions */
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+/* Transition colors utility */
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
