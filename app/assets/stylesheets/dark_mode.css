@@ -479,6 +479,174 @@ html.no-transitions * {
 }
 
 /* ============================================
+   Tailwind Class Dark Mode Overrides
+   ============================================
+   Override common hardcoded Tailwind classes for dark mode.
+   These ensure that if any template uses bg-white, text-gray-*, etc.,
+   they still work properly in dark mode.
+*/
+
+/* Background overrides */
+.dark .bg-white,
+html.dark .bg-white {
+  background-color: var(--dm-surface);
+}
+
+.dark .bg-gray-50,
+.dark .bg-stone-50,
+html.dark .bg-gray-50,
+html.dark .bg-stone-50 {
+  background-color: var(--dm-bg);
+}
+
+.dark .bg-gray-100,
+.dark .bg-stone-100,
+html.dark .bg-gray-100,
+html.dark .bg-stone-100 {
+  background-color: var(--dm-surface);
+}
+
+.dark .bg-gray-200,
+.dark .bg-stone-200,
+html.dark .bg-gray-200,
+html.dark .bg-stone-200 {
+  background-color: var(--dm-surface-alt);
+}
+
+/* Text color overrides */
+.dark .text-gray-900,
+.dark .text-stone-900,
+html.dark .text-gray-900,
+html.dark .text-stone-900 {
+  color: var(--dm-text);
+}
+
+.dark .text-gray-800,
+.dark .text-stone-800,
+html.dark .text-gray-800,
+html.dark .text-stone-800 {
+  color: var(--dm-text);
+}
+
+.dark .text-gray-700,
+.dark .text-stone-700,
+html.dark .text-gray-700,
+html.dark .text-stone-700 {
+  color: var(--dm-text);
+}
+
+.dark .text-gray-600,
+.dark .text-stone-600,
+html.dark .text-gray-600,
+html.dark .text-stone-600 {
+  color: var(--dm-text-secondary);
+}
+
+.dark .text-gray-500,
+.dark .text-stone-500,
+html.dark .text-gray-500,
+html.dark .text-stone-500 {
+  color: var(--dm-text-muted);
+}
+
+.dark .text-gray-400,
+.dark .text-stone-400,
+html.dark .text-gray-400,
+html.dark .text-stone-400 {
+  color: var(--dm-text-placeholder);
+}
+
+/* Border color overrides */
+.dark .border-gray-200,
+.dark .border-stone-200,
+html.dark .border-gray-200,
+html.dark .border-stone-200 {
+  border-color: var(--dm-border);
+}
+
+.dark .border-gray-300,
+.dark .border-stone-300,
+html.dark .border-gray-300,
+html.dark .border-stone-300 {
+  border-color: var(--dm-border);
+}
+
+.dark .divide-gray-200 > :not([hidden]) ~ :not([hidden]),
+.dark .divide-stone-200 > :not([hidden]) ~ :not([hidden]),
+html.dark .divide-gray-200 > :not([hidden]) ~ :not([hidden]),
+html.dark .divide-stone-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--dm-border);
+}
+
+/* Ring color overrides */
+.dark .ring-gray-200,
+.dark .ring-stone-200,
+html.dark .ring-gray-200,
+html.dark .ring-stone-200 {
+  --tw-ring-color: var(--dm-border);
+}
+
+/* Shadow overrides for dark mode */
+.dark .shadow-sm,
+html.dark .shadow-sm {
+  box-shadow: var(--dm-shadow-sm);
+}
+
+.dark .shadow-md,
+.dark .shadow,
+html.dark .shadow-md,
+html.dark .shadow {
+  box-shadow: var(--dm-shadow-md);
+}
+
+.dark .shadow-lg,
+html.dark .shadow-lg {
+  box-shadow: var(--dm-shadow-lg);
+}
+
+/* Placeholder text override */
+.dark input::placeholder,
+.dark textarea::placeholder,
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: var(--dm-text-placeholder);
+}
+
+/* Form element overrides */
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="password"],
+.dark input[type="number"],
+.dark input[type="search"],
+.dark input[type="tel"],
+.dark input[type="url"],
+.dark select,
+.dark textarea,
+html.dark input[type="text"],
+html.dark input[type="email"],
+html.dark input[type="password"],
+html.dark input[type="number"],
+html.dark input[type="search"],
+html.dark input[type="tel"],
+html.dark input[type="url"],
+html.dark select,
+html.dark textarea {
+  background-color: var(--dm-input-bg);
+  border-color: var(--dm-input-border);
+  color: var(--dm-text);
+}
+
+.dark input:focus,
+.dark select:focus,
+.dark textarea:focus,
+html.dark input:focus,
+html.dark select:focus,
+html.dark textarea:focus {
+  border-color: var(--dm-nerve);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+/* ============================================
    Print Styles - Force Light Mode
    ============================================ */
 @media print {
