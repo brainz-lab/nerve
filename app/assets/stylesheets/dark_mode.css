@@ -1,100 +1,500 @@
 /* ============================================
-   NERVE - Dark Mode Support
+   DARK MODE STYLES - BrainzLab Standard
    ============================================
+   Standardized dark mode implementation for all BrainzLab products.
+   Uses `dm-*` prefix for CSS classes and `brainzlab-theme` localStorage key.
 
-   This file provides dark mode CSS variables and utility classes
-   for the Nerve dashboard. It extends brainzlab-ui's dark mode system.
-
-   Usage:
-   1. Dark mode is toggled via the dark-mode Stimulus controller
-   2. Add .dark class to <html> element for dark mode
-   3. Use prefers-color-scheme: dark for automatic system detection
-
-   Color tokens (from brainzlab-ui):
-   - Dark bg: #121212 (--color-dark-bg)
-   - Dark surface: #1e1e1e (--color-dark-surface)
-   - Dark surface light: #2a2a2a (--color-dark-surface-light)
-   - Dark text: #e8e1d7 (--color-dark-text)
-   - Dark text muted: #a0a0a0 (--color-dark-text-muted)
-   - Dark border: #333333 (--color-dark-border)
+   Dark mode tokens from brainzlab-ui:
+   - Dark bg: #121212
+   - Dark surface: #1e1e1e
+   - Dark surface light: #2a2a2a
+   - Dark text: #e8e1d7
+   - Dark text muted: #a0a0a0
+   - Dark border: #333333
 */
 
-/* ----------------------------------------
-   CSS VARIABLES - Light/Dark Theme
-   ---------------------------------------- */
+/* ============================================
+   CSS VARIABLES - Light Theme (Default)
+   ============================================ */
 :root {
-  /* Light theme (default) */
-  --nerve-bg: var(--color-cream-50, #FAF9F7);
-  --nerve-surface: white;
-  --nerve-surface-elevated: var(--color-cream-100, #F4F1EC);
-  --nerve-text: var(--color-ink-900, #3D3833);
-  --nerve-text-muted: var(--color-ink-500, #7A7165);
-  --nerve-border: var(--color-cream-200, #E8E1D7);
+  /* Core backgrounds */
+  --dm-bg: #FAFAF9;
+  --dm-surface: #FFFFFF;
+  --dm-surface-alt: #F5F5F0;
+  --dm-surface-hover: #F0EFED;
 
-  /* Theme color for browser chrome */
-  --nerve-theme-color: #FAF9F7;
+  /* Core text */
+  --dm-text: #1a1a1a;
+  --dm-text-secondary: #6B6760;
+  --dm-text-muted: #8B8780;
+  --dm-text-placeholder: #A5A29C;
+
+  /* Core borders */
+  --dm-border: #E8E5E0;
+  --dm-border-light: #F0EFED;
+
+  /* Interactive */
+  --dm-input-bg: #FFFFFF;
+  --dm-input-border: #E8E5E0;
+  --dm-hover-bg: #F5F5F0;
+
+  /* Code blocks */
+  --dm-code-bg: #1A1A1A;
+  --dm-code-text: #E8E5E0;
+
+  /* Shadows */
+  --dm-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --dm-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
+  --dm-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+  /* Status colors - Light */
+  --dm-success: #16A34A;
+  --dm-success-bg: #DCFCE7;
+  --dm-success-text: #166534;
+  --dm-success-border: #A7F3D0;
+
+  --dm-warning: #D97706;
+  --dm-warning-bg: #FEF3C7;
+  --dm-warning-text: #92400E;
+  --dm-warning-border: #FDE68A;
+
+  --dm-error: #DC2626;
+  --dm-error-bg: #FEF2F2;
+  --dm-error-text: #991B1B;
+  --dm-error-border: #FECACA;
+
+  --dm-info: #2563EB;
+  --dm-info-bg: #EFF6FF;
+  --dm-info-text: #1E40AF;
+  --dm-info-border: #BFDBFE;
+
+  /* Nerve-specific: Brand accent */
+  --dm-nerve: #8B5CF6;
+  --dm-nerve-dark: #7C3AED;
+  --dm-nerve-light: #A78BFA;
 }
 
-.dark {
-  /* Dark theme */
-  --nerve-bg: var(--color-dark-bg, #121212);
-  --nerve-surface: var(--color-dark-surface, #1e1e1e);
-  --nerve-surface-elevated: var(--color-dark-surface-light, #2a2a2a);
-  --nerve-text: var(--color-dark-text, #e8e1d7);
-  --nerve-text-muted: var(--color-dark-text-muted, #a0a0a0);
-  --nerve-border: var(--color-dark-border, #333333);
+/* ============================================
+   CSS VARIABLES - Dark Theme
+   ============================================ */
+html.dark,
+.dark,
+[data-theme="dark"] {
+  /* Core backgrounds */
+  --dm-bg: #121212;
+  --dm-surface: #1e1e1e;
+  --dm-surface-alt: #2a2a2a;
+  --dm-surface-hover: #333333;
 
-  /* Theme color for browser chrome */
-  --nerve-theme-color: #121212;
+  /* Core text */
+  --dm-text: #e8e1d7;
+  --dm-text-secondary: #a0a0a0;
+  --dm-text-muted: #707070;
+  --dm-text-placeholder: #666666;
+
+  /* Core borders */
+  --dm-border: #333333;
+  --dm-border-light: #2a2a2a;
+
+  /* Interactive */
+  --dm-input-bg: #2a2a2a;
+  --dm-input-border: #333333;
+  --dm-hover-bg: #2a2a2a;
+
+  /* Code blocks */
+  --dm-code-bg: #0d0d0d;
+  --dm-code-text: #e8e1d7;
+
+  /* Shadows */
+  --dm-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --dm-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+  --dm-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+
+  /* Status colors - Dark */
+  --dm-success: #22C55E;
+  --dm-success-bg: rgba(34, 197, 94, 0.15);
+  --dm-success-text: #86EFAC;
+  --dm-success-border: rgba(34, 197, 94, 0.3);
+
+  --dm-warning: #F59E0B;
+  --dm-warning-bg: rgba(245, 158, 11, 0.15);
+  --dm-warning-text: #FCD34D;
+  --dm-warning-border: rgba(245, 158, 11, 0.3);
+
+  --dm-error: #EF4444;
+  --dm-error-bg: rgba(239, 68, 68, 0.15);
+  --dm-error-text: #FCA5A5;
+  --dm-error-border: rgba(239, 68, 68, 0.3);
+
+  --dm-info: #3B82F6;
+  --dm-info-bg: rgba(59, 130, 246, 0.15);
+  --dm-info-text: #93C5FD;
+  --dm-info-border: rgba(59, 130, 246, 0.3);
+
+  /* Nerve-specific */
+  --dm-nerve: #A78BFA;
+  --dm-nerve-dark: #8B5CF6;
+  --dm-nerve-light: #C4B5FD;
 }
 
-/* ----------------------------------------
-   SEMANTIC COLOR UTILITIES
-   ----------------------------------------
-   Use these for theme-aware styling */
-
-.bg-nerve-bg { background-color: var(--nerve-bg); }
-.bg-nerve-surface { background-color: var(--nerve-surface); }
-.bg-nerve-surface-elevated { background-color: var(--nerve-surface-elevated); }
-
-.text-nerve-text { color: var(--nerve-text); }
-.text-nerve-muted { color: var(--nerve-text-muted); }
-
-.border-nerve-border { border-color: var(--nerve-border); }
-
-/* ----------------------------------------
-   PREFERS-COLOR-SCHEME SUPPORT
-   ----------------------------------------
-   Automatically apply dark mode when system prefers dark
-   (unless user has explicitly chosen a theme) */
-
+/* ============================================
+   System Preference Support
+   ============================================ */
 @media (prefers-color-scheme: dark) {
-  :root:not(.light) {
-    --nerve-bg: var(--color-dark-bg, #121212);
-    --nerve-surface: var(--color-dark-surface, #1e1e1e);
-    --nerve-surface-elevated: var(--color-dark-surface-light, #2a2a2a);
-    --nerve-text: var(--color-dark-text, #e8e1d7);
-    --nerve-text-muted: var(--color-dark-text-muted, #a0a0a0);
-    --nerve-border: var(--color-dark-border, #333333);
-    --nerve-theme-color: #121212;
+  html:not(.light):not([data-theme="light"]) {
+    /* Core backgrounds */
+    --dm-bg: #121212;
+    --dm-surface: #1e1e1e;
+    --dm-surface-alt: #2a2a2a;
+    --dm-surface-hover: #333333;
+
+    /* Core text */
+    --dm-text: #e8e1d7;
+    --dm-text-secondary: #a0a0a0;
+    --dm-text-muted: #707070;
+    --dm-text-placeholder: #666666;
+
+    /* Core borders */
+    --dm-border: #333333;
+    --dm-border-light: #2a2a2a;
+
+    /* Interactive */
+    --dm-input-bg: #2a2a2a;
+    --dm-input-border: #333333;
+    --dm-hover-bg: #2a2a2a;
+
+    /* Code blocks */
+    --dm-code-bg: #0d0d0d;
+    --dm-code-text: #e8e1d7;
+
+    /* Shadows */
+    --dm-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --dm-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --dm-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+
+    /* Status colors */
+    --dm-success: #22C55E;
+    --dm-success-bg: rgba(34, 197, 94, 0.15);
+    --dm-success-text: #86EFAC;
+    --dm-success-border: rgba(34, 197, 94, 0.3);
+
+    --dm-warning: #F59E0B;
+    --dm-warning-bg: rgba(245, 158, 11, 0.15);
+    --dm-warning-text: #FCD34D;
+    --dm-warning-border: rgba(245, 158, 11, 0.3);
+
+    --dm-error: #EF4444;
+    --dm-error-bg: rgba(239, 68, 68, 0.15);
+    --dm-error-text: #FCA5A5;
+    --dm-error-border: rgba(239, 68, 68, 0.3);
+
+    --dm-info: #3B82F6;
+    --dm-info-bg: rgba(59, 130, 246, 0.15);
+    --dm-info-text: #93C5FD;
+    --dm-info-border: rgba(59, 130, 246, 0.3);
+
+    /* Nerve brand */
+    --dm-nerve: #A78BFA;
+    --dm-nerve-dark: #8B5CF6;
+    --dm-nerve-light: #C4B5FD;
   }
 }
 
-/* ----------------------------------------
-   TRANSITION UTILITIES
-   ---------------------------------------- */
+/* ============================================
+   STANDARDIZED UTILITY CLASSES (dm-* prefix)
+   ============================================ */
 
-.theme-transition-all {
-  transition-property: color, background-color, border-color,
-                       text-decoration-color, fill, stroke,
-                       box-shadow, opacity;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
+/* Background utilities */
+.dm-bg {
+  background-color: var(--dm-bg);
 }
 
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  .theme-transition-all {
-    transition-duration: 0.01ms !important;
+.dm-surface {
+  background-color: var(--dm-surface);
+}
+
+.dm-surface-alt {
+  background-color: var(--dm-surface-alt);
+}
+
+.dm-surface-hover:hover {
+  background-color: var(--dm-surface-hover);
+}
+
+/* Text utilities */
+.dm-text {
+  color: var(--dm-text);
+}
+
+.dm-text-secondary {
+  color: var(--dm-text-secondary);
+}
+
+.dm-text-muted {
+  color: var(--dm-text-muted);
+}
+
+.dm-text-placeholder {
+  color: var(--dm-text-placeholder);
+}
+
+/* Border utilities */
+.dm-border {
+  border-color: var(--dm-border);
+}
+
+.dm-border-light {
+  border-color: var(--dm-border-light);
+}
+
+/* Card component */
+.dm-card {
+  background-color: var(--dm-surface);
+  border: 1px solid var(--dm-border);
+  box-shadow: var(--dm-shadow-sm);
+}
+
+/* Input component */
+.dm-input {
+  background-color: var(--dm-input-bg);
+  border: 1px solid var(--dm-input-border);
+  color: var(--dm-text);
+}
+
+.dm-input:focus {
+  border-color: var(--dm-nerve);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+.dm-input::placeholder {
+  color: var(--dm-text-placeholder);
+}
+
+/* Button components */
+.dm-btn-primary {
+  background-color: var(--dm-text);
+  color: var(--dm-bg);
+}
+
+.dm-btn-primary:hover {
+  opacity: 0.9;
+}
+
+.dm-btn-secondary {
+  background-color: var(--dm-surface-alt);
+  border: 1px solid var(--dm-border);
+  color: var(--dm-text-secondary);
+}
+
+.dm-btn-secondary:hover {
+  background-color: var(--dm-surface-hover);
+}
+
+/* Table components */
+.dm-table-header {
+  background-color: var(--dm-surface-alt);
+  color: var(--dm-text-muted);
+  border-bottom: 1px solid var(--dm-border);
+}
+
+.dm-table-row {
+  border-bottom: 1px solid var(--dm-border-light);
+}
+
+.dm-table-row:hover {
+  background-color: var(--dm-hover-bg);
+}
+
+/* Code block */
+.dm-code {
+  background-color: var(--dm-code-bg);
+  color: var(--dm-code-text);
+}
+
+/* Sidebar */
+.dm-sidebar {
+  background-color: var(--dm-surface);
+  border-right: 1px solid var(--dm-border);
+}
+
+/* Status alerts */
+.dm-alert-success {
+  background-color: var(--dm-success-bg);
+  color: var(--dm-success-text);
+  border: 1px solid var(--dm-success-border);
+}
+
+.dm-alert-warning {
+  background-color: var(--dm-warning-bg);
+  color: var(--dm-warning-text);
+  border: 1px solid var(--dm-warning-border);
+}
+
+.dm-alert-error {
+  background-color: var(--dm-error-bg);
+  color: var(--dm-error-text);
+  border: 1px solid var(--dm-error-border);
+}
+
+.dm-alert-info {
+  background-color: var(--dm-info-bg);
+  color: var(--dm-info-text);
+  border: 1px solid var(--dm-info-border);
+}
+
+/* Badges */
+.dm-badge-success {
+  background-color: var(--dm-success-bg);
+  color: var(--dm-success-text);
+}
+
+.dm-badge-warning {
+  background-color: var(--dm-warning-bg);
+  color: var(--dm-warning-text);
+}
+
+.dm-badge-error {
+  background-color: var(--dm-error-bg);
+  color: var(--dm-error-text);
+}
+
+.dm-badge-info {
+  background-color: var(--dm-info-bg);
+  color: var(--dm-info-text);
+}
+
+.dm-badge-neutral {
+  background-color: var(--dm-surface-alt);
+  color: var(--dm-text-muted);
+}
+
+/* ============================================
+   Dark Mode Toggle Button
+   ============================================ */
+.dm-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.375rem;
+  background: transparent;
+  border: 1px solid var(--dm-border);
+  border-radius: 0.5rem;
+  color: var(--dm-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dm-toggle:hover {
+  background-color: var(--dm-hover-bg);
+  color: var(--dm-text);
+}
+
+.dm-toggle:focus-visible {
+  outline: 2px solid var(--dm-nerve);
+  outline-offset: 2px;
+}
+
+.dm-toggle svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.dm-toggle:hover svg {
+  transform: rotate(15deg);
+}
+
+/* Sun/Moon icon visibility */
+.dm-toggle .icon-sun {
+  display: none;
+}
+
+.dm-toggle .icon-moon {
+  display: block;
+}
+
+html.dark .dm-toggle .icon-sun,
+[data-theme="dark"] .dm-toggle .icon-sun {
+  display: block;
+}
+
+html.dark .dm-toggle .icon-moon,
+[data-theme="dark"] .dm-toggle .icon-moon {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light):not([data-theme="light"]) .dm-toggle .icon-sun {
+    display: block;
+  }
+  html:not(.light):not([data-theme="light"]) .dm-toggle .icon-moon {
+    display: none;
+  }
+}
+
+/* ============================================
+   Scrollbar Dark Mode
+   ============================================ */
+html.dark ::-webkit-scrollbar,
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html.dark ::-webkit-scrollbar-track,
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--dm-surface);
+}
+
+html.dark ::-webkit-scrollbar-thumb,
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--dm-border);
+  border-radius: 4px;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover,
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #444444;
+}
+
+/* ============================================
+   Transition Support
+   ============================================ */
+body,
+.dm-card,
+.dm-sidebar,
+.dm-input,
+.dm-btn-secondary,
+.dm-table-row {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* Disable transitions on initial load */
+html.no-transitions,
+html.no-transitions * {
+  transition: none !important;
+}
+
+/* ============================================
+   Print Styles - Force Light Mode
+   ============================================ */
+@media print {
+  :root,
+  html.dark,
+  [data-theme="dark"] {
+    --dm-bg: #FAFAF9;
+    --dm-surface: #FFFFFF;
+    --dm-surface-alt: #F5F5F0;
+    --dm-text: #1a1a1a;
+    --dm-text-secondary: #6B6760;
+    --dm-text-muted: #8B8780;
+    --dm-border: #E8E5E0;
+  }
+
+  .dm-toggle {
+    display: none;
   }
 }

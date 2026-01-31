@@ -16,11 +16,13 @@
     <%# Prevent flash of wrong theme on page load %>
     <script>
       (function() {
-        const stored = localStorage.getItem('nerve-dark-mode');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const isDark = stored !== null ? stored === 'true' : prefersDark;
-        document.documentElement.classList.toggle('dark', isDark);
-        document.documentElement.classList.toggle('light', !isDark);
+        const savedTheme = localStorage.getItem('brainzlab-theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.add('light');
+        }
       })();
     </script>
 
