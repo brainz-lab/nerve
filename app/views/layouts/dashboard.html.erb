@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full" data-controller="dark-mode">
+  <head>
+    <title><%= content_for(:title) || "Dashboard" %> | Nerve</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Nerve">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#FAF9F7">
+    <meta name="description" content="Nerve - Background job monitoring for Sidekiq, Solid Queue, Resque, DelayedJob, and GoodJob">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Prevent flash of wrong theme on page load and provide toggle function %>
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem('brainzlab-theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.add('light');
+        }
+
+        // Vanilla JS dark mode toggle - works without Stimulus
+        window.toggleDarkMode = function() {
+          const html = document.documentElement;
+          const isDark = html.classList.contains('dark');
+          if (isDark) {
+            html.classList.remove('dark');
+            html.classList.add('light');
+            localStorage.setItem('brainzlab-theme', 'light');
+          } else {
+            html.classList.remove('light');
+            html.classList.add('dark');
+            localStorage.setItem('brainzlab-theme', 'dark');
+          }
+          // Update icon if exists
+          const icon = document.querySelector('[data-dark-mode-target="icon"]');
+          if (icon) {
+            icon.innerHTML = isDark
+              ? '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>'
+              : '<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>';
+          }
+        };
+      })();
+    </script>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "dark_mode", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <%# Google Analytics - only in production %>
+    <% if Rails.env.production? %>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-CXHFR6PC8W"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-CXHFR6PC8W');
+      </script>
+    <% end %>
+  </head>
+
+  <body class="h-full bg-cream-50 dark:bg-dark-bg text-ink-900 dark:text-dark-text antialiased transition-colors duration-300">
+    <%# Flash messages %>
+    <% if notice %>
+      <div class="fixed top-4 right-4 z-50 animate-fade-in-down">
+        <div class="alert-success max-w-md">
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span><%= notice %></span>
+        </div>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="fixed top-4 right-4 z-50 animate-fade-in-down">
+        <div class="alert-error max-w-md">
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span><%= alert %></span>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="min-h-full">
+      <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <%= yield %>
+      </main>
+    </div>
+
+    <%# Dark mode toggle button %>
+    <button
+      type="button"
+      class="dark-mode-toggle nerve-dark-toggle"
+      data-dark-mode-target="icon"
+      onclick="toggleDarkMode()"
+      aria-label="Toggle dark mode"
+      aria-pressed="false"
+      title="Toggle dark mode"
+    >
+      <%# Sun icon - shown in dark mode %>
+      <svg class="hidden dark:block w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+      </svg>
+      <%# Moon icon - shown in light mode %>
+      <svg class="block dark:hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+      </svg>
+    </button>
+
+    <%# Optional footer - uncomment when needed %>
+    <%#
+    <footer class="border-t border-cream-200 dark:border-dark-border bg-white dark:bg-dark-surface mt-auto">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="flex items-center justify-between text-sm text-ink-500 dark:text-dark-text-muted">
+          <p>Nerve by Brainz Lab</p>
+          <p>Your async backbone</p>
+        </div>
+      </div>
+    </footer>
+    %>
+  </body>
+</html>
