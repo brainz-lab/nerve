@@ -6,7 +6,7 @@ default: &default
 
 development:
   <<: *default
-  database: nerve_development
+  url: <%= ENV.fetch("DATABASE_URL", "postgres://postgres:postgres@localhost:5432") %>/nerve_development
 
 test:
   <<: *default
