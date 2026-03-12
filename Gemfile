@@ -52,7 +52,7 @@ gem "image_processing", "~> 1.2"
 gem "aws-sdk-s3", require: false
 
 
-gem "brainzlab", "~> 0.1.12"
+gem "fluyenta-ruby", "~> 0.1.16", require: "brainzlab"
 if ENV["BUNDLE_DEPLOYMENT"] == "1"
   gem "fluyenta-ui", "~> 0.1.3"
 elsif File.exist?("/fluyenta-ui")
